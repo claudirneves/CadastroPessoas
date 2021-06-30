@@ -22,6 +22,7 @@ public class PessoaService {
 	    public Page<PessoaDTO> list(Pageable pageable){
 	        Page<Pessoa> pessoaPage = pessoaRepository.findAll(pageable);
 	        int totalElements = pessoaPage.getNumberOfElements();
+	        System.out.println("passou aquu");
 	        return pessoaMapper.pessoaPageToPessoaDTOPage(pessoaPage,pageable,totalElements);
 	    }
 	    @Transient

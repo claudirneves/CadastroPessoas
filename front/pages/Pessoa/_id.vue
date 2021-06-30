@@ -1,6 +1,10 @@
 <template>
     <div>
-        <h1>Cadastro de Pessoa</h1>
+        <Toolbar class="p-mb-4">
+            <template #left>
+                <Button label="Voltar" icon="pi pi-plus" class="p-button" @click="voltar()" />
+            </template>
+        </Toolbar>
         <form @submit.prevent="save()">
             <div class="p-fluid">
                 <div class="p-field">
@@ -12,7 +16,7 @@
                     <inputText id="sobrenome" v-model="pessoa.sobrenome" type="text" />
                 </div>
             </div>
-            <Button  type="submit" label="Salvar" class="p-button-secondary" />
+            <Button id="btn-salvar" type="submit" label="Salvar" class="success" />
         </form>
     </div>
 </template>
@@ -21,7 +25,7 @@
 import PessoaService from '~/service/PessoaService.js'
 
 export default {
-    layout: "default",
+    layout: 'default',
     async asyncData({params, error}){
         return {
             id: params.id,
@@ -37,11 +41,14 @@ export default {
         this.pessoaService = new PessoaService(this.$axios);
     },
     mounted(){
-        if(this.id != "new"){
+        if(this.id != 'new'){
             this.getPessoa(this.id);
         }
     },
     methods: {
+        voltar(){
+            this.$router.push('../pessoa')
+        },
         async getPessoa(id){
             let response = await this.pessoaService.byId(id);
             if(response.id){
@@ -49,13 +56,13 @@ export default {
             }
         },
         async save(){
-            console.log(this.pessoa)
             let values = this.pessoa;
-            this.pessoaService.save(values).then((response) => { this.$toast.add({severity: "success", detail: "sucesso!", life:5000});
-            this.$router.push("/pessoa");
+            this.pessoaService.save(values).then((response) => { 
+            this.$toast.add({severity: 'success', detail: 'sucesso!', life:5000});
+            this.$router.push('/pessoa');
             })
             .catch((error) => {
-                this.$toast.add({severity: "error", detail: "merda!", life:5000});
+                this.$toast.add({severity: 'error', detail: 'merda!', life:5000});
             });
             
         }
@@ -65,3 +72,9 @@ export default {
 
 
 </script>
+
+<style scoped>
+    #btn-salvar {
+        margin: 15px;
+    }
+</style>

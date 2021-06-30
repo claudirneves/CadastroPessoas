@@ -1,5 +1,7 @@
 package com.claudir.CadastroPessoas.model;
 
+
+
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -14,26 +16,27 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity(name="pessoa")
+@Entity(name="utensilio")
 @Getter @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Pessoa implements Serializable {
-
+public class Utensilio implements Serializable{
+	
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy =GenerationType.AUTO )
 	private Long id;
 	
 	@Column
-	private String nome;
+	private String descricao;
 	
 	@Column
-	private String sobrenome;
-
-	
+	private String disponivel;
 	
 	
 }
+	
+	
+	

@@ -36,7 +36,10 @@ public class PessoaController {
     public PessoaDTO getById(@PathVariable("id") Long id){
         return pessoaService.byId(id);
     }
-
+    @RequestMapping(value = "/{nome}", method = RequestMethod.GET)
+    public PessoaDTO getByNome(@PathVariable("nome") String nome) {
+    	return pessoaService.byNome(nome);
+    }
     @RequestMapping( method = RequestMethod.POST)
     public PessoaDTO add(@RequestBody PessoaDTO pessoaDTO){
         return pessoaService.save(pessoaDTO);
@@ -44,7 +47,6 @@ public class PessoaController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public PessoaDTO update(@PathVariable("id") Long id, @RequestBody PessoaDTO pessoaDTO){
-    	//System.out.println(id);
     	PessoaDTO.PessoaDTOBuilder pessoaDTOBuilder = pessoaDTO.toBuilder();
         pessoaDTO = pessoaDTOBuilder.id(id).build();
         return pessoaService.save(pessoaDTO);

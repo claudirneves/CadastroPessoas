@@ -4,7 +4,6 @@ export default class PessoaService {
     }
 
     save(values){
-        console.log(values)
         if(values.id == null || values.id == ''){
             return this.http.$post('/pessoa', values);
         }else{
@@ -20,5 +19,8 @@ export default class PessoaService {
     }
     delete(id){
         return this.http.$delete('/pessoa/'+id);
+    }
+    byNome(nome){
+        return this.http.$get('/pessoa/'+nome);
     }
 }
